@@ -19,16 +19,20 @@ unspendable.home ()
 { 
     cd ~/unspendable
 }
-issy.test () 
+issy.doge () 
 { 
-    ~/unspendable/unspendable.py D DDDDDDDDDDDDDDDD 30
+    ~/unspendable/unspendable.py $1 D 30 
 }
 
-alias .test=issy.test
+issy.trans ()
+{
+	_STR=$(echo $1 | sed 's/\,\ /2/g' | sed 's/\ /1/g')
+	echo $_STR | tr 'a-z' 'A-Z' | sed 's/I/i/g' | sed 's/O/o/g' 
+}
+
+alias .doge=issy.doge
 issy.check () 
 { 
-	: : issy.check $(.test)
-   : curl https://dogechain.info/address/DDDDDDDDDDDDDDDDDXXXXXXXXXXXYLzC7d 2> /dev/null | grep 'text:'
    curl https://dogechain.info/address/$1 2> /dev/null > $_ISSY_DIR/$1.$$ | grep 'text:'
    (
    echo $1
@@ -45,5 +49,15 @@ issy.reflection ()
 { 
     declare -F | grep issy | while read CMD; do
         $CMD | egrep '^issy|^    : :';
+    done
+}
+issy.fetch () 
+{
+	issy.check $(issy.doge $(issy.trans "$1"));
+}
+issy.unpack () 
+{ 
+    while read WORD RECV SEND; do
+        echo $WORD | cut -c 2-28 | sed 's/X//g' | sed 's/1/ /g' | sed 's/2/, /g' | tr 'A-Z' 'a-z';
     done
 }
