@@ -26,7 +26,7 @@ issy.doge ()
 
 issy.trans ()
 {
-	_STR=$(echo $1 | sed 's/\,\ /2/g' | sed 's/\ /1/g')
+	_STR=$(echo $1 | sed 's/\//5/g' | sed 's/\:/4/g' | sed 's/\./3/g' | sed 's/\,\ /2/g' | sed 's/\ /1/g')
 	echo $_STR | tr 'a-z' 'A-Z' | sed 's/I/i/g' | sed 's/O/o/g' 
 }
 

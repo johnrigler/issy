@@ -9,6 +9,4 @@ issy ()
     . ~/issy/issy.bash
 }
 
-To run, just type 'issy', you will then be given the following functions:
-
-
+Then just type 'issy' and then enter 'issy.[TAB] to see your different sub-commands.
